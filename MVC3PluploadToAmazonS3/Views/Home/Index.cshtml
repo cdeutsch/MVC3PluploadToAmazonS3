@@ -1,0 +1,64 @@
+﻿@model MVC3PluploadToAmazonS3.Models.PluploadAmazonS3Model
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Upload to Amazon S3</h2>
+
+<div id="uploader">
+    <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
+</div>
+
+@Html.HiddenFor(mm => mm.AWSAccessKeyId)
+@Html.HiddenFor(mm => mm.Policy)
+@Html.HiddenFor(mm => mm.Signature)
+@Html.HiddenFor(mm => mm.Bucket)
+@Html.HiddenFor(mm => mm.Acl)
+
+@section scriptFiles {
+<script>
+
+$(document).ready(function () {
+
+    $("#uploader").plupload({
+        //amazon settings.
+        runtimes: 'flash,silverlight',
+        url: 'http://' + $('#Bucket').val() + '.s3.amazonaws.com/',
+        max_file_size: '100000000mb',
+        multipart: true,
+        multipart_params: {
+            'key': '${filename}', // use filename as a key
+            'Filename': '${filename}', // adding this to keep consistency across the runtimes
+            'acl': $('#Acl').val(),
+            'Content-Type': 'binary/octet-stream',
+            'success_action_status': '201',
+            'AWSAccessKeyId': $('#AWSAccessKeyId').val(),
+            'policy': $('#Policy').val(),
+            'signature': $('#Signature').val()
+        },
+        // optional, but better be specified directly
+        //file_data_name: 'file',
+        // re-use widget (not related to S3, but to Plupload UI Widget)
+        //multiple_queues: true,
+
+        // Resize images on clientside if we can
+        //resize: { width: 320, height: 240, quality: 90 },
+
+        // Specify what files to browse for
+        filters: [
+            { title: "Video files", extensions: "mp4,m4v,wmv,avi,mov,mpg,mpeg,mkv" }
+            //{ title: "Image files", extensions: "jpg,gif,png" },
+            //{ title: "Zip files", extensions: "zip" }
+        ],
+
+        // Flash settings
+        flash_swf_url: 'Scripts/plupload/plupload.flash.swf',
+
+        // Silverlight settings
+        silverlight_xap_url: 'Scripts/plupload/plupload.silverlight.xap'
+    });
+
+});
+</script>
+
+}
