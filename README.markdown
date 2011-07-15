@@ -10,11 +10,12 @@ https://github.com/iwasrobbed/Rails3-S3-Uploader-Plupload
 
 ## Usage ##
 
-Modify the settings in HomeController.cs to use your Amazan credentials and set your S3 bucket.
+Upload the crossdomain.xml found in the root of the site to your Amazon S3 Bucket.
 
+Modify the settings in HomeController.cs to use your Amazan credentials and set your S3 bucket.
 
 ## History ##
 
 ### 7/15/2011 ###
 * Created
-
+* Added crossdomain.xml example

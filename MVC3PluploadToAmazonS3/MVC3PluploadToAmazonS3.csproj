@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="crossdomain.xml" />
     <Content Include="Content\plupload\img\plupload-bw.png" />
     <Content Include="Content\plupload\img\plupload.png" />
     <Content Include="Content\plupload\jquery.ui.plupload.css" />
